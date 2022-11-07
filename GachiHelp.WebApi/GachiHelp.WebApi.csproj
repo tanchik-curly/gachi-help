@@ -7,7 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.10" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GachiHelp.BLL\GachiHelp.BLL.csproj" />
+    <ProjectReference Include="..\GachiHelp.DAL\GachiHelp.DAL.csproj" />
   </ItemGroup>
 
 </Project>
