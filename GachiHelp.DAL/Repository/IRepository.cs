@@ -8,7 +8,7 @@ using GachiHelp.DAL.Entities;
 
 namespace GachiHelp.DAL.Repository
 {
-    internal interface IRepository<TEntity> where TEntity : class, IEntity
+    public interface IRepository<TEntity> where TEntity : class, IEntity
     {
         IEnumerable<TEntity> AllIncluding(
             params Expression<Func<TEntity, object>>[] includeProperties
