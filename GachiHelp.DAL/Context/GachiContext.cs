@@ -13,5 +13,13 @@ namespace GachiHelp.DAL.Context
         public DbSet<User> Users { get; set; }
 
         public GachiContext(DbContextOptions<GachiContext> options) : base(options) { }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Seed();
+            
+            base.OnModelCreating(modelBuilder);
+        }
+
     }
 }
