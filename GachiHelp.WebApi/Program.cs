@@ -17,9 +17,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddEntityFrameworkSqlServer().AddDbContext<GachiContext>(options =>
+builder.Services.AddDbContext<GachiContext>(options =>
     options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection")
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        o => o.MigrationsAssembly("GachiHelp.DAL")
     )
 );
 
@@ -63,7 +64,6 @@ app.UseCors(b => b
     .AllowAnyOrigin()
     .AllowAnyMethod()
     .AllowAnyHeader()
-    .AllowCredentials()
 );
 
 //app.UseHttpsRedirection();
