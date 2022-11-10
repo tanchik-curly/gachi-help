@@ -10,6 +10,6 @@ namespace GachiHelp.BLL.DTOs.User
     {
         public string Token { get; set; }
         public long ExpirationTime { get; set; }
-        public DAL.Entities.User User { get; set; }
+        public int UserId { get; set; }
     }
 }

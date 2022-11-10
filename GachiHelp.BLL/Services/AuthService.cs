@@ -29,6 +29,11 @@ public class AuthService : IAuthService
             Subject = new(new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim("login", user.Login),
+                new Claim(ClaimTypes.Name, user.Name),
+                new Claim(ClaimTypes.Surname, user.Surname),
+                new Claim("patronym", user.Patronym),
                 new Claim(ClaimTypes.Role, user.Role.ToString("G")),
             }),
             Expires = expirationTime,
@@ -44,7 +49,7 @@ public class AuthService : IAuthService
         {
             Token = token,
             ExpirationTime = ((DateTimeOffset)expirationTime).ToUnixTimeSeconds(),
-            User = user
+            UserId = user.Id
         };
     }
 
