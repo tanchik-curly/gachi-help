@@ -44,7 +44,7 @@ public class AuthService : IAuthService
         {
             Token = token,
             ExpirationTime = ((DateTimeOffset)expirationTime).ToUnixTimeSeconds(),
-            Id = user.Id
+            User = user
         };
     }
 

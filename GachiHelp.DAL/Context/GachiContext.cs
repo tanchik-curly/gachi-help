@@ -16,6 +16,9 @@ namespace GachiHelp.DAL.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>().HasIndex(u => u.Login).IsUnique();
+            modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
+
             modelBuilder.Seed();
             
             base.OnModelCreating(modelBuilder);
