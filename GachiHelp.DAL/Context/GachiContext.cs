@@ -11,6 +11,8 @@ namespace GachiHelp.DAL.Context
     public class GachiContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<HelpCategory> HelpCategories { get; set; }
+        public DbSet<Help> Helps { get; set; }
 
         public GachiContext(DbContextOptions<GachiContext> options) : base(options) { }
 
