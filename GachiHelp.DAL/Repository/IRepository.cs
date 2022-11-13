@@ -22,6 +22,10 @@ namespace GachiHelp.DAL.Repository
             params Expression<Func<TEntity, object>>[] includeProperties
         );
         IEnumerable<TEntity> FindBy(Expression<Func<TEntity, bool>> predicate);
+        IEnumerable<TEntity> FindIncluding(
+            Expression<Func<TEntity, bool>> predicate,
+            params Expression<Func<TEntity, object>>[] includeProperties
+        );
         void Add(TEntity entity);
         void Update(TEntity entity);
         void Delete(TEntity entity);

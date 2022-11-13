@@ -40,7 +40,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-builder.Services.AddScoped<IRepository<User>, Repository<User>>();
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 builder.Services.AddSingleton<IAuthService>(
     new AuthService(
@@ -48,6 +48,8 @@ builder.Services.AddSingleton<IAuthService>(
         builder.Configuration.GetValue<string>("JWTSecretKey")
     )
 );
+
+builder.Services.AddScoped<IHelpService, HelpService>();
 
 builder.Services.AddCors();
 

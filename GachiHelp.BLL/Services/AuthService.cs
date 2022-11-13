@@ -20,7 +20,7 @@ public class AuthService : IAuthService
         _jwtSecret = jwtSecret;
     }
 
-    public AuthData GetAuthData(User user)
+    public AuthDto GetAuthData(User user)
     {
         var expirationTime = DateTime.UtcNow.AddSeconds(_jwtLifespan);
 
@@ -45,7 +45,7 @@ public class AuthService : IAuthService
         var tokenHandler = new JwtSecurityTokenHandler();
         var token = tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
 
-        return new AuthData
+        return new AuthDto
         {
             Token = token,
             ExpirationTime = ((DateTimeOffset)expirationTime).ToUnixTimeSeconds(),

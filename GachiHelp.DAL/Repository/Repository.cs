@@ -42,6 +42,15 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, I
 
     public IEnumerable<TEntity> FindBy(Expression<Func<TEntity, bool>> predicate) => _context.Set<TEntity>().Where(predicate);
 
+    public IEnumerable<TEntity> FindIncluding(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties)
+    {
+        IQueryable<TEntity> query = _context.Set<TEntity>();
+
+        query = includeProperties.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
+
+        return query.Where(predicate).AsEnumerable();
+    }
+
     public void Add(TEntity entity) => _context.Set<TEntity>().Add(entity);
 
     public void Update(TEntity entity) => _context.Set<TEntity>().Update(entity);
