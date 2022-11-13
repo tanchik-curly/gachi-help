@@ -10,7 +10,7 @@ namespace GachiHelp.BLL.Services.Interfaces
 {
     public interface IAuthService
     {
-        AuthData GetAuthData(User user);
+        AuthDto GetAuthData(User user);
         string HashPassword(string password);
         bool VerifyPassword(string actualPassword, string hashedPassword);
     }

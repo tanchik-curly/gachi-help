@@ -22,7 +22,7 @@ namespace GachiHelp.WebApi.Controllers
         }
 
         [HttpPost("login")]
-        public ActionResult<AuthData> Post([FromBody] LoginViewModel model)
+        public ActionResult<AuthDto> Post([FromBody] LoginViewModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 

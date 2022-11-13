@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GachiHelp.BLL.DTOs.User
 {
-    public class AuthData
+    public class AuthDto
     {
         public string Token { get; set; }
         public long ExpirationTime { get; set; }
