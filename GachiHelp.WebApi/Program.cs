@@ -4,6 +4,7 @@ using GachiHelp.BLL.Services.Interfaces;
 using GachiHelp.DAL.Context;
 using GachiHelp.DAL.Entities;
 using GachiHelp.DAL.Repository;
+using GachiHelp.WebApi.AutoMapperProfile;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -50,6 +51,8 @@ builder.Services.AddSingleton<IAuthService>(
 );
 
 builder.Services.AddScoped<IHelpService, HelpService>();
+
+builder.Services.AddAutoMapper(typeof(GachiProfile));
 
 builder.Services.AddCors();
 

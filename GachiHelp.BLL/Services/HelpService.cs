@@ -1,4 +1,5 @@
-﻿using GachiHelp.BLL.DTOs;
+﻿using AutoMapper;
+using GachiHelp.BLL.DTOs;
 using GachiHelp.BLL.Services.Interfaces;
 using GachiHelp.DAL.Entities;
 using GachiHelp.DAL.Repository;
@@ -8,24 +9,30 @@ namespace GachiHelp.BLL.Services
     public class HelpService : IHelpService
     {
         private readonly IRepository<Help> _helpRepository;
+        private readonly IMapper _mapper;
 
-        public HelpService(IRepository<Help> helpRepository)
+        public HelpService(IRepository<Help> helpRepository, IMapper mapper)
         {
             _helpRepository = helpRepository;
+            _mapper = mapper;
         }
 
-        public IEnumerable<Help> GetHelp(int skip = 0, int limit = -1)
+        public PaginationList<HelpDto> GetHelp(int skip = 0, int limit = -1)
         {
-            var helps = _helpRepository.AllIncluding(h => h.Author!, h => h.HelpCategory!)
-                .OrderBy(h => h.CreatedAt).Skip(skip);
-            return (limit == -1) ? helps : helps.Take(limit);
+            var helps = _helpRepository.AllIncluding(h => h.Author!, h => h.HelpCategory!);
+            int count = helps.Count();
+            helps = helps.OrderBy(h => h.CreatedAt).Skip(skip);
+            helps = (limit == -1) ? helps : helps.Take(limit);
+            return new PaginationList<HelpDto> { Items = helps.Select(h => _mapper.Map<HelpDto>(h)), ItemCount = count };
         }
 
-        public IEnumerable<Help> GetHelpByUser(int userId, int skip = 0, int limit = -1)
+        public PaginationList<HelpDto> GetHelpByUser(int userId, int skip = 0, int limit = -1)
         {
-            var helps = _helpRepository.FindIncluding(h => h.AuthorId == userId, h => h.Author!,  h => h.HelpCategory!)
-                .OrderBy(h => h.CreatedAt).Skip(skip);
-            return (limit == -1) ? helps : helps.Take(limit);
+            var helps = _helpRepository.FindIncluding(h => h.AuthorId == userId, h => h.Author!, h => h.HelpCategory!);
+            int count = helps.Count();
+            helps = helps.OrderBy(h => h.CreatedAt).Skip(skip);
+            helps = (limit == -1) ? helps : helps.Take(limit);
+            return new PaginationList<HelpDto> { Items = helps.Select(h => _mapper.Map<HelpDto>(h)), ItemCount = count };
         }
 
         public IEnumerable<HelpStatAggregateDto> GetHelpStatsByCategory(int? categoryId)

@@ -16,15 +16,15 @@ namespace GachiHelp.WebApi.Controllers
         }
 
         [HttpGet("/requested-help")]
-        public ActionResult<IEnumerable<Help>> Get([FromQuery] int? skip, [FromQuery] int? limit)
+        public ActionResult<PaginationList<HelpDto>> Get([FromQuery] int? skip, [FromQuery] int? limit)
         {
-            return _helpService.GetHelp(skip ?? 0, limit ?? -1).ToArray();
+            return _helpService.GetHelp(skip ?? 0, limit ?? -1);
         }
 
         [HttpGet("/requested-help/{userId}")]        
-        public ActionResult<IEnumerable<Help>> GetByUser(int userId, [FromQuery]int? skip, [FromQuery]int? limit)
+        public ActionResult<PaginationList<HelpDto>> GetByUser(int userId, [FromQuery]int? skip, [FromQuery]int? limit)
         {
-            return _helpService.GetHelpByUser(userId, skip??0, limit??-1).ToArray();
+            return _helpService.GetHelpByUser(userId, skip??0, limit??-1);
         }
 
         [HttpGet("/stat/help-requests")]
