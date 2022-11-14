@@ -1,6 +1,5 @@
 ﻿using GachiHelp.BLL.DTOs;
 using GachiHelp.BLL.Services.Interfaces;
-using GachiHelp.DAL.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GachiHelp.WebApi.Controllers
