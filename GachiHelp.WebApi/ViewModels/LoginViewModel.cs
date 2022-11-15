@@ -1,8 +1,7 @@
-﻿namespace GachiHelp.WebApi.ViewModels
+﻿namespace GachiHelp.WebApi.ViewModels;
+
+public class LoginViewModel
 {
-    public class LoginViewModel
-    {
-        public string Login { get; set; }
-        public string Password { get; set; }
-    }
+    public string? Login { get; set; }
+    public string? Password { get; set; }
 }

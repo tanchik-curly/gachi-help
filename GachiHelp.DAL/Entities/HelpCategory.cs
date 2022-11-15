@@ -1,9 +1,8 @@
-﻿namespace GachiHelp.DAL.Entities
-{
-    public class HelpCategory : IEntity
-    {
-        public int Id { get; set; }
+﻿namespace GachiHelp.DAL.Entities;
 
-        public string Name { get; set; } = null!;
-    }
+public class HelpCategory : IEntity
+{
+    public int Id { get; set; }
+
+    public string Name { get; set; } = null!;
 }

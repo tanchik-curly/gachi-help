@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using GachiHelp.BLL.DTOs.User;
+using GachiHelp.BLL.DTOs;
 using GachiHelp.BLL.Services.Interfaces;
 using GachiHelp.DAL.Entities;
 using Microsoft.IdentityModel.Tokens;
@@ -61,17 +61,12 @@ public class AuthService : IAuthService
             Convert.FromBase64String(hashedPassword));
 
     private static bool Compare(ReadOnlySpan<byte> a, ReadOnlySpan<byte> b)
-
     {
-
         int x = a.Length ^ b.Length;
 
         for (int i = 0; i < a.Length && i < b.Length; ++i)
-
         {
-
             x |= a[i] ^ b[i];
-
         }
         return x == 0;
     }

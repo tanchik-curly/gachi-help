@@ -1,46 +1,29 @@
-using System.Text;
+using GachiHelp.BLL.AutoMapperProfile;
 using GachiHelp.BLL.Services;
 using GachiHelp.BLL.Services.Interfaces;
 using GachiHelp.DAL.Context;
-using GachiHelp.DAL.Entities;
 using GachiHelp.DAL.Repository;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using GachiHelp.WebApi;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 builder.Services.AddDbContext<GachiContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection"),
         o => o.MigrationsAssembly("GachiHelp.DAL")
     )
 );
+builder.Services.AddJwtAuthentication(builder.Configuration);
+builder.Services.AddAutoMapper(typeof(GachiProfile));
+builder.Services.AddCors();
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = false,
-            ValidateAudience = false,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-
-            IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(builder.Configuration.GetValue<string>("JWTSecretKey"))
-            )
-        };
-    });
-
-builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+// Add custom services
 
 builder.Services.AddSingleton<IAuthService>(
     new AuthService(
@@ -49,9 +32,11 @@ builder.Services.AddSingleton<IAuthService>(
     )
 );
 
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IHelpService, HelpService>();
+builder.Services.AddScoped<IStatService, StatService>();
 
-builder.Services.AddCors();
+
 
 var app = builder.Build();
 
@@ -67,8 +52,6 @@ app.UseCors(b => b
     .AllowAnyMethod()
     .AllowAnyHeader()
 );
-
-//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
