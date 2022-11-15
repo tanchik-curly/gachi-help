@@ -28,7 +28,7 @@ public class AuthService : IAuthService
         {
             Subject = new(new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim("id", user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim("login", user.Login),
                 new Claim("name", user.Name),
