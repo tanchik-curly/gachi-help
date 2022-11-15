@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace GachiHelp.WebApi.Controllers;
 
 [ApiController]
-[Route("Requested-help")]
+[Route("[controller]")]
 public class HelpController : ControllerBase 
 {
     private readonly IHelpService _helpService;
@@ -16,14 +16,14 @@ public class HelpController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<PaginationList<HelpDto>> Get([FromQuery] int? skip, [FromQuery] int? limit)
+    public ActionResult<PaginationList<HelpDto>> Get([FromQuery] int skip = 0, [FromQuery] int limit = -1)
     {
-        return _helpService.GetHelp(skip: skip ?? 0, limit: limit ?? -1);
+        return _helpService.GetHelp(skip: skip, limit: limit);
     }
 
     [HttpGet("{userId}")]        
-    public ActionResult<PaginationList<HelpDto>> GetByUser(int userId, [FromQuery]int? skip, [FromQuery]int? limit)
+    public ActionResult<PaginationList<HelpDto>> GetByUser(int userId, [FromQuery]int skip = 0, [FromQuery]int limit = -1)
     {
-        return _helpService.GetHelp(userId, skip ?? 0, limit ?? -1);
+        return _helpService.GetHelp(userId, skip, limit);
     }
 }

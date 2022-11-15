@@ -25,4 +25,10 @@ public class UsersController : ControllerBase
         return _userRepository.AllIncluding().Select(u => _mapper.Map<UserDto>(u))
             .OrderBy(u=>u.Surname).ThenBy(u=>u.Name).ThenBy(u=>u.Patronym).ToArray();
     }
+
+    [HttpGet("{userId}")]
+    public ActionResult<UserDetailDto?> Detail(int userId)
+    {
+        return _mapper.Map<UserDetailDto>(_userRepository.GetSingle(userId));
+    }
 }

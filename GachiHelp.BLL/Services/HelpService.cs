@@ -19,13 +19,14 @@ public class HelpService : IHelpService
 
     public PaginationList<HelpDto> GetHelp(int userId = -1, int skip = 0, int limit = -1)
     {
-        var help = _helpRepository.AllIncluding(h => h.Author!, h => h.HelpCategory!)
-            .OrderBy(h => h.CreatedAt).Skip(skip);
+        var help = _helpRepository.AllIncluding(h => h.Author!, h => h.HelpCategory!);
 
         if (userId != -1)
             help = help.Where(h => h.AuthorId == userId);
 
         int count = help.Count();
+
+        help = help.OrderBy(h => h.CreatedAt).Skip(skip);
 
         if (limit != -1) 
             help = help.Take(limit);
