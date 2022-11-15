@@ -9,6 +9,7 @@ public class GachiProfile : Profile
     public GachiProfile()
     {
         CreateMap<User, UserDto>();
+        CreateMap<User, UserDetailDto>();
         CreateMap<Help, HelpDto>();
     }
 }
