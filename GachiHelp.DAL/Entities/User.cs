@@ -6,17 +6,17 @@ public class User : IEntity
 {
     public int Id { get; set; }
 
-    public string Login { get; set; }
+    public string Login { get; set; } = null!;
 
-    public string Email { get; set; }
+    public string Email { get; set; } = null!;
 
     public Role Role { get; set; }
 
-    public string PasswordHash { get; set; }
+    public string PasswordHash { get; set; } = null!;
 
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
-    public string Surname { get; set; }
+    public string Surname { get; set; } = null!;
 
-    public string Patronym { get; set; }
+    public string Patronym { get; set; } = null!;
 }

@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GachiHelp.BLL\GachiHelp.BLL.csproj" />
-    <ProjectReference Include="..\GachiHelp.DAL\GachiHelp.DAL.csproj" />
   </ItemGroup>
 
 </Project>

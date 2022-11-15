@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using GachiHelp.DAL.Entities;
 using GachiHelp.DAL.Enums;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +10,7 @@ namespace GachiHelp.DAL.Context
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
+            #region Users
             modelBuilder.Entity<User>().HasData(
                 new User
                 {
@@ -100,7 +97,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Теплицький",
-                    Name = "Костянтин ",
+                    Name = "Костянтин",
                     Patronym = "Артемович"
                 },
                 new User
@@ -111,7 +108,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Троцюк",
-                    Name = "Федір ",
+                    Name = "Федір",
                     Patronym = "Сарматович"
                 },
                 new User
@@ -122,7 +119,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Найдьонов",
-                    Name = "Далібор ",
+                    Name = "Далібор",
                     Patronym = "Тарасович"
                 },
                 new User
@@ -133,7 +130,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Стахів",
-                    Name = "Бративой ",
+                    Name = "Бративой",
                     Patronym = "Фролович"
                 },
                 new User
@@ -144,7 +141,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Фешовець",
-                    Name = "Аскольд ",
+                    Name = "Аскольд",
                     Patronym = "Тихонович"
                 },
                 new User
@@ -155,7 +152,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Гуляницький",
-                    Name = "Вукол ",
+                    Name = "Вукол",
                     Patronym = "Тимурович"
                 },
                 new User
@@ -166,7 +163,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Малишко",
-                    Name = "Цвітан ",
+                    Name = "Цвітан",
                     Patronym = "Зорянович"
                 },
                 new User
@@ -177,7 +174,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Плішка",
-                    Name = "Щастислав ",
+                    Name = "Щастислав",
                     Patronym = "Світанович"
                 },
                 new User
@@ -188,7 +185,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Косар",
-                    Name = "Доброслав ",
+                    Name = "Доброслав",
                     Patronym = "Любомирович"
                 },
                 new User
@@ -199,7 +196,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Ангелович",
-                    Name = "Євлампій ",
+                    Name = "Євлампій",
                     Patronym = "Вадимович"
                 },
                 new User
@@ -210,7 +207,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Степченко",
-                    Name = "Чара ",
+                    Name = "Чара",
                     Patronym = "Світанович"
                 },
                 new User
@@ -221,7 +218,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Герасимець",
-                    Name = "Юхим ",
+                    Name = "Юхим",
                     Patronym = "Макарович"
                 },
                 new User
@@ -232,7 +229,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Рябоконь",
-                    Name = "Любослав ",
+                    Name = "Любослав",
                     Patronym = "Азарович"
                 },
                 new User
@@ -243,7 +240,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Біленко",
-                    Name = "Юхим ",
+                    Name = "Юхим",
                     Patronym = "Юліанович"
                 },
                 new User
@@ -254,7 +251,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Семеніхін",
-                    Name = "Щастибог ",
+                    Name = "Щастибог",
                     Patronym = "Вітанович"
                 },
                 new User
@@ -265,7 +262,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Собко",
-                    Name = "Йонас ",
+                    Name = "Йонас",
                     Patronym = "Тихонович"
                 },
                 new User
@@ -276,7 +273,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Гопкало",
-                    Name = "Хвала ",
+                    Name = "Хвала",
                     Patronym = "Адріанович"
                 },
                 new User
@@ -287,7 +284,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Кравчик",
-                    Name = "Троян ",
+                    Name = "Троян",
                     Patronym = "Сарматович"
                 },
                 new User
@@ -298,7 +295,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Ясинський",
-                    Name = "Сергій ",
+                    Name = "Сергій",
                     Patronym = "Найденович"
                 },
                 new User
@@ -309,7 +306,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Андрущенко",
-                    Name = "Йомер ",
+                    Name = "Йомер",
                     Patronym = "Арсенович"
                 },
                 new User
@@ -320,7 +317,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Авратинський",
-                    Name = "Уличан ",
+                    Name = "Уличан",
                     Patronym = "Ярославович"
                 },
                 new User
@@ -331,7 +328,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Євтушенко",
-                    Name = "Еразм ",
+                    Name = "Еразм",
                     Patronym = "Жданович"
                 },
                 new User
@@ -342,7 +339,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Ємельяненко",
-                    Name = "Йосеф ",
+                    Name = "Йосеф",
                     Patronym = "Милославович"
                 },
                 new User
@@ -353,7 +350,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Невінчаний",
-                    Name = "Артем ",
+                    Name = "Артем",
                     Patronym = "Володимирович"
                 },
                 new User
@@ -364,7 +361,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Чехівський",
-                    Name = "Братислав ",
+                    Name = "Братислав",
                     Patronym = "Богданович"
                 },
                 new User
@@ -375,7 +372,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Медведюк",
-                    Name = "Яртур ",
+                    Name = "Яртур",
                     Patronym = "Юліанович"
                 },
                 new User
@@ -386,7 +383,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Кузьма",
-                    Name = "Осемрит ",
+                    Name = "Осемрит",
                     Patronym = "Яромирович"
                 },
                 new User
@@ -397,7 +394,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Підгаєцький",
-                    Name = "Федір ",
+                    Name = "Федір",
                     Patronym = "Левович"
                 },
                 new User
@@ -408,7 +405,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Пашко",
-                    Name = "Родослав ",
+                    Name = "Родослав",
                     Patronym = "Федорович"
                 },
                 new User
@@ -419,7 +416,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Канішевський",
-                    Name = "Живослав ",
+                    Name = "Живослав",
                     Patronym = "Северинович"
                 },
                 new User
@@ -430,7 +427,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Арсенич",
-                    Name = "Миробог ",
+                    Name = "Миробог",
                     Patronym = "Тихонович"
                 },
                 new User
@@ -441,7 +438,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Корольчук",
-                    Name = "Драган ",
+                    Name = "Драган",
                     Patronym = "Любомирович"
                 },
                 new User
@@ -452,7 +449,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Полотай",
-                    Name = "Хотян ",
+                    Name = "Хотян",
                     Patronym = "Мстиславович"
                 },
                 new User
@@ -463,7 +460,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Могиленко",
-                    Name = "Життєлюб ",
+                    Name = "Життєлюб",
                     Patronym = "Остапович"
                 },
                 new User
@@ -474,7 +471,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Пащук",
-                    Name = "Анісій ",
+                    Name = "Анісій",
                     Patronym = "Ростиславович"
                 },
                 new User
@@ -485,7 +482,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Щурат",
-                    Name = "Йомер ",
+                    Name = "Йомер",
                     Patronym = "Антонович"
                 },
                 new User
@@ -496,7 +493,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Роднянський",
-                    Name = "Микита ",
+                    Name = "Микита",
                     Patronym = "Федорович"
                 },
                 new User
@@ -507,7 +504,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Хмелецький",
-                    Name = "Щедрогост ",
+                    Name = "Щедрогост",
                     Patronym = "Макарович"
                 },
                 new User
@@ -518,7 +515,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Авдієвський",
-                    Name = "Данко ",
+                    Name = "Данко",
                     Patronym = "Августинович"
                 },
                 new User
@@ -529,7 +526,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Калениченко",
-                    Name = "Хранимир ",
+                    Name = "Хранимир",
                     Patronym = "Орестович"
                 },
                 new User
@@ -540,7 +537,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Оніщенко",
-                    Name = "Корнелій ",
+                    Name = "Корнелій",
                     Patronym = "Вадимович"
                 },
                 new User
@@ -551,7 +548,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Батенко",
-                    Name = "Хранимир ",
+                    Name = "Хранимир",
                     Patronym = "Чеславович"
                 },
                 new User
@@ -562,7 +559,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Зазуляк",
-                    Name = "Радан ",
+                    Name = "Радан",
                     Patronym = "Юліанович"
                 },
                 new User
@@ -573,7 +570,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Крамськой",
-                    Name = "Дорофій ",
+                    Name = "Дорофій",
                     Patronym = "Юхимович"
                 },
                 new User
@@ -584,7 +581,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Громики",
-                    Name = "Щедрогост ",
+                    Name = "Щедрогост",
                     Patronym = "Леонідович"
                 },
                 new User
@@ -595,7 +592,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Кайда",
-                    Name = "Ничипір ",
+                    Name = "Ничипір",
                     Patronym = "Никодимович"
                 },
                 new User
@@ -606,7 +603,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Денисенко",
-                    Name = "Еміль ",
+                    Name = "Еміль",
                     Patronym = "Пилипович"
                 },
                 new User
@@ -617,7 +614,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Манзій",
-                    Name = "Юліан ",
+                    Name = "Юліан",
                     Patronym = "Левович"
                 },
                 new User
@@ -628,7 +625,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Марченко",
-                    Name = "Адріан ",
+                    Name = "Адріан",
                     Patronym = "Зорянович"
                 },
                 new User
@@ -639,7 +636,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Витвицький",
-                    Name = "Києслав ",
+                    Name = "Києслав",
                     Patronym = "Йосипович"
                 },
                 new User
@@ -650,7 +647,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Петрусь",
-                    Name = "Єгор ",
+                    Name = "Єгор",
                     Patronym = "Устимович"
                 },
                 new User
@@ -661,7 +658,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Галаса",
-                    Name = "Добривод ",
+                    Name = "Добривод",
                     Patronym = "Тимурович"
                 },
                 new User
@@ -672,7 +669,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Прудіус",
-                    Name = "Колодій ",
+                    Name = "Колодій",
                     Patronym = "Драганович"
                 },
                 new User
@@ -683,7 +680,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Канішевський",
-                    Name = "Наслав ",
+                    Name = "Наслав",
                     Patronym = "Адамович"
                 },
                 new User
@@ -694,7 +691,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Гриньків",
-                    Name = "Панас ",
+                    Name = "Панас",
                     Patronym = "Северинович"
                 },
                 new User
@@ -705,7 +702,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Костюк",
-                    Name = "Щедрогост ",
+                    Name = "Щедрогост",
                     Patronym = "Тихонович"
                 },
                 new User
@@ -716,7 +713,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Ткач",
-                    Name = "Недан ",
+                    Name = "Недан",
                     Patronym = "Сарматович"
                 },
                 new User
@@ -727,7 +724,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Стець",
-                    Name = "Малик ",
+                    Name = "Малик",
                     Patronym = "Вікторович"
                 },
                 new User
@@ -738,7 +735,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Гомоляка",
-                    Name = "Любим ",
+                    Name = "Любим",
                     Patronym = "Макарович"
                 },
                 new User
@@ -749,7 +746,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Циба",
-                    Name = "Ліпослав ",
+                    Name = "Ліпослав",
                     Patronym = "Герасимович"
                 },
                 new User
@@ -760,7 +757,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Прилуцький",
-                    Name = "Боримир ",
+                    Name = "Боримир",
                     Patronym = "Остапович"
                 },
                 new User
@@ -771,7 +768,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Бараник",
-                    Name = "Іоанн ",
+                    Name = "Іоанн",
                     Patronym = "Арсенович"
                 },
                 new User
@@ -782,7 +779,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Устиянович",
-                    Name = "Май ",
+                    Name = "Май",
                     Patronym = "Орестович"
                 },
                 new User
@@ -793,7 +790,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Андрійченко",
-                    Name = "Осмомисл ",
+                    Name = "Осмомисл",
                     Patronym = "Борисович"
                 },
                 new User
@@ -804,7 +801,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Ситенко",
-                    Name = "Власт ",
+                    Name = "Власт",
                     Patronym = "Семенович"
                 },
                 new User
@@ -815,7 +812,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Мізецький",
-                    Name = "Ладислав ",
+                    Name = "Ладислав",
                     Patronym = "Никодимович"
                 },
                 new User
@@ -826,7 +823,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Кованько",
-                    Name = "Щастибог ",
+                    Name = "Щастибог",
                     Patronym = "Олегович"
                 },
                 new User
@@ -837,7 +834,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Юцевич",
-                    Name = "Ярило ",
+                    Name = "Ярило",
                     Patronym = "Максимович"
                 },
                 new User
@@ -848,7 +845,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Лагодовський",
-                    Name = "Єремій ",
+                    Name = "Єремій",
                     Patronym = "Федорович"
                 },
                 new User
@@ -859,7 +856,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Коновалюк",
-                    Name = "Дантур ",
+                    Name = "Дантур",
                     Patronym = "Добромирович"
                 },
                 new User
@@ -870,7 +867,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Ярошенко",
-                    Name = "Грива ",
+                    Name = "Грива",
                     Patronym = "Соломонович"
                 },
                 new User
@@ -881,7 +878,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Коробко",
-                    Name = "Віст ",
+                    Name = "Віст",
                     Patronym = "Максимович"
                 },
                 new User
@@ -892,7 +889,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Адамовський",
-                    Name = "Русан ",
+                    Name = "Русан",
                     Patronym = "Северинович"
                 },
                 new User
@@ -903,7 +900,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Коморовський",
-                    Name = "Любодар ",
+                    Name = "Любодар",
                     Patronym = "Найденович"
                 },
                 new User
@@ -914,7 +911,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Пантелюк",
-                    Name = "Добролик ",
+                    Name = "Добролик",
                     Patronym = "Мстиславович"
                 },
                 new User
@@ -925,7 +922,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Дудка",
-                    Name = "Йошка ",
+                    Name = "Йошка",
                     Patronym = "Фролович"
                 },
                 new User
@@ -936,7 +933,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Архипенко",
-                    Name = "Жито ",
+                    Name = "Жито",
                     Patronym = "Семенович"
                 },
                 new User
@@ -947,7 +944,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Моравський",
-                    Name = "Назарій ",
+                    Name = "Назарій",
                     Patronym = "Радимович"
                 },
                 new User
@@ -958,7 +955,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Сенюк",
-                    Name = "Жито ",
+                    Name = "Жито",
                     Patronym = "Герасимович"
                 },
                 new User
@@ -969,7 +966,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Татарнюк",
-                    Name = "Іоанн ",
+                    Name = "Іоанн",
                     Patronym = "Романович"
                 },
                 new User
@@ -980,7 +977,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Корчинський",
-                    Name = "Надій ",
+                    Name = "Надій",
                     Patronym = "Арсенович"
                 },
                 new User
@@ -991,7 +988,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Галущинський",
-                    Name = "Немир ",
+                    Name = "Немир",
                     Patronym = "Арсенович"
                 },
                 new User
@@ -1002,7 +999,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Веремій",
-                    Name = "Колодій ",
+                    Name = "Колодій",
                     Patronym = "Полянович"
                 },
                 new User
@@ -1013,7 +1010,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Костогриз",
-                    Name = "Милодух ",
+                    Name = "Милодух",
                     Patronym = "Добромирович"
                 },
                 new User
@@ -1024,7 +1021,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Охримович",
-                    Name = "Уличан ",
+                    Name = "Уличан",
                     Patronym = "Вітанович"
                 },
                 new User
@@ -1035,7 +1032,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Оробець",
-                    Name = "Юхим ",
+                    Name = "Юхим",
                     Patronym = "Радимович"
                 },
                 new User
@@ -1046,7 +1043,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Лісовий",
-                    Name = "Світовид ",
+                    Name = "Світовид",
                     Patronym = "Семенович"
                 },
                 new User
@@ -1057,7 +1054,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Гончарук",
-                    Name = "Біловид ",
+                    Name = "Біловид",
                     Patronym = "Семенович"
                 },
                 new User
@@ -1068,7 +1065,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Крижицький",
-                    Name = "Цвітан ",
+                    Name = "Цвітан",
                     Patronym = "Сарматович"
                 },
                 new User
@@ -1079,7 +1076,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Кирпань",
-                    Name = "Ян ",
+                    Name = "Ян",
                     Patronym = "Антонович"
                 },
                 new User
@@ -1090,7 +1087,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Перебийніс",
-                    Name = "Щастислав ",
+                    Name = "Щастислав",
                     Patronym = "Максимович"
                 },
                 new User
@@ -1101,7 +1098,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Черкасенко",
-                    Name = "Єгор ",
+                    Name = "Єгор",
                     Patronym = "Фролович"
                 },
                 new User
@@ -1112,7 +1109,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Загребельний",
-                    Name = "Тиміш ",
+                    Name = "Тиміш",
                     Patronym = "Олегович"
                 },
                 new User
@@ -1123,7 +1120,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Маринченко",
-                    Name = "Гервасій ",
+                    Name = "Гервасій",
                     Patronym = "Йосипович"
                 },
                 new User
@@ -1134,7 +1131,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Миронюк",
-                    Name = "Флор ",
+                    Name = "Флор",
                     Patronym = "Милославович"
                 },
                 new User
@@ -1145,7 +1142,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Чучупак",
-                    Name = "Єгор ",
+                    Name = "Єгор",
                     Patronym = "Зорянович"
                 },
                 new User
@@ -1156,7 +1153,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Чубатенко",
-                    Name = "Магадар ",
+                    Name = "Магадар",
                     Patronym = "Ростиславович"
                 },
                 new User
@@ -1167,7 +1164,7 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Гайденко",
-                    Name = "Щедрогост ",
+                    Name = "Щедрогост",
                     Patronym = "Захарович"
                 },
                 new User
@@ -1178,10 +1175,11 @@ namespace GachiHelp.DAL.Context
                     Role = Role.User,
                     PasswordHash = HashPassword("password"),
                     Surname = "Кормош",
-                    Name = "Шерлок ",
+                    Name = "Шерлок",
                     Patronym = "Арсенович"
                 }
             );
+            #endregion
 
             modelBuilder.Entity<HelpCategory>().HasData(
                 new HelpCategory { Id = 1, Name = "Соціальна допомога" },
@@ -1194,7 +1192,7 @@ namespace GachiHelp.DAL.Context
 
             var help = Enumerable.Range(1, 2001).Select(n =>
             {
-                Random r = new Random();
+                Random r = new();
                 int status = r.Next(100) switch
                 {
                      >= 0 and <= 10 => 0,

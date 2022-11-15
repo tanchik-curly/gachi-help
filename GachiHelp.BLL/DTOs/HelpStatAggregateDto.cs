@@ -1,9 +1,8 @@
-﻿namespace GachiHelp.BLL.DTOs
-{
-    public class HelpStatAggregateDto
-    {
-        public string Group { get; set; } = null!;
+﻿namespace GachiHelp.BLL.DTOs;
 
-        public int Quantity { get; set; }
-    }
+public class HelpStatAggregateDto
+{
+    public string Group { get; set; } = null!;
+
+    public int Quantity { get; set; }
 }
