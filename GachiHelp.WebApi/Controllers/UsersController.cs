@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using GachiHelp.BLL.DTOs;
+using GachiHelp.BLL.Services.Interfaces;
 using GachiHelp.DAL.Entities;
 using GachiHelp.DAL.Repository;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Cryptography;
 
 namespace GachiHelp.WebApi.Controllers;
 
@@ -10,25 +12,27 @@ namespace GachiHelp.WebApi.Controllers;
 [Route("[controller]")]
 public class UsersController : ControllerBase
 {
-    private readonly IRepository<User> _userRepository;
-    private readonly IMapper _mapper;
+    private IUserService _userService;
+    private IMapper _mapper;
 
-    public UsersController(IRepository<User> userRepository, IMapper mapper)
+    public UsersController(IUserService userService, IMapper mapper)
     {
-        _userRepository = userRepository;
+        _userService = userService;
         _mapper = mapper;
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<UserDto>> Index() 
+    public ActionResult<PaginationList<UserDto>> Get(int skip = 0, int limit = -1, string? searchQuery = "") 
     {
-        return _userRepository.AllIncluding().Select(u => _mapper.Map<UserDto>(u))
-            .OrderBy(u=>u.Surname).ThenBy(u=>u.Name).ThenBy(u=>u.Patronym).ToArray();
+        return _userService.GetAll(skip, limit, searchQuery);
     }
 
     [HttpGet("{userId}")]
-    public ActionResult<UserDetailDto?> Detail(int userId)
+    public ActionResult<UserDetailDto?> Get(int userId)
     {
-        return _mapper.Map<UserDetailDto>(_userRepository.GetSingle(userId));
+        User? user = _userService.GetUser(userId);
+        if (user == null)
+            return BadRequest();
+        return _mapper.Map<UserDetailDto>(user);
     }
 }
