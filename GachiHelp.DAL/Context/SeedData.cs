@@ -11,7 +11,8 @@ namespace GachiHelp.DAL.Context
         public static void Seed(this ModelBuilder modelBuilder)
         {
             #region Users
-            modelBuilder.Entity<User>().HasData(
+            var users = new User[106]
+            {
                 new User
                 {
                     Id = 1,
@@ -1178,9 +1179,63 @@ namespace GachiHelp.DAL.Context
                     Name = "Шерлок",
                     Patronym = "Арсенович"
                 }
-            );
+            };
+            modelBuilder.Entity<User>().HasData(users);
             #endregion
 
+            #region UserComments
+            var forumNames = new string[5]
+            {
+                "Які документи потрібні для оформлення статусу постраждалої особи?",
+                "Куди звернутися за отриманням психологічної допомоги",
+                "Найдешевший спосіб потрапити в Польщу",
+                "Як отримати статус біженця за кордоном?",
+                "Хто такі рожеві водосвинки???"
+            };
+
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var comments = new object[1000];
+            var random = new Random();
+            for (int i = 0; i < comments.Length; ++i)
+            {
+                comments[i] = new
+                {
+                    Id = i + 1,
+                    CreateDateTime = DateTime.Now.AddDays(-1 * random.Next(100)),
+                    ForumName = forumNames[random.Next(0, forumNames.Length)],
+                    Text = new string(Enumerable.Repeat(chars, 50).Select(s => s[random.Next(s.Length)]).ToArray()),
+                    AuthorId = random.Next(2, users.Length + 1)
+                };
+            }
+
+            modelBuilder.Entity<UserComment>().HasData(comments);
+            #endregion
+
+            #region UserSocialStats
+            var stats = new UserSocialStats[users.Length];
+
+            int votesCount, answearsCount, closedDiscussionsCount;
+            for (int i = 0; i < stats.Length; ++i)
+            {
+                votesCount = random.Next(0, 100);
+                answearsCount = random.Next(0, 100 - votesCount);
+                closedDiscussionsCount = 100 - votesCount - answearsCount;
+
+                stats[i] = new UserSocialStats
+                {
+                    Id = i + 1,
+                    UserId = i + 1,
+                    VotesCount = votesCount,
+                    AnswearsCount = answearsCount,
+                    ClosedDiscussionsCount = closedDiscussionsCount,
+                    Carma = random.Next(0, 100000)
+                };
+            }
+
+            modelBuilder.Entity<UserSocialStats>().HasData(stats);
+            #endregion
+
+            #region Help
             modelBuilder.Entity<HelpCategory>().HasData(
                 new HelpCategory { Id = 1, Name = "Соціальна допомога" },
                 new HelpCategory { Id = 2, Name = "Допомога по працевлаштуванню" },
@@ -1219,6 +1274,8 @@ namespace GachiHelp.DAL.Context
                 new JobApplicationsType { Id = 7, Name = "Програміст" },
                 new JobApplicationsType { Id = 8, Name = "Танцівщиця" }
             );
+            modelBuilder.Entity<Help>().HasData(help);
+            #endregion
         }
         private static string HashPassword(string password) => Convert.ToBase64String(SHA256.HashData(Encoding.Default.GetBytes(password)));
     }

@@ -33,5 +33,4 @@ public class GachiContext : DbContext
         
         base.OnModelCreating(modelBuilder);
     }
-
 }

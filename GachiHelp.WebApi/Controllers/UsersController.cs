@@ -2,9 +2,7 @@
 using GachiHelp.BLL.DTOs;
 using GachiHelp.BLL.Services.Interfaces;
 using GachiHelp.DAL.Entities;
-using GachiHelp.DAL.Repository;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Cryptography;
 
 namespace GachiHelp.WebApi.Controllers;
 
@@ -12,8 +10,8 @@ namespace GachiHelp.WebApi.Controllers;
 [Route("[controller]")]
 public class UsersController : ControllerBase
 {
-    private IUserService _userService;
-    private IMapper _mapper;
+    private readonly IUserService _userService;
+    private readonly IMapper _mapper;
 
     public UsersController(IUserService userService, IMapper mapper)
     {
@@ -34,5 +32,18 @@ public class UsersController : ControllerBase
         if (user == null)
             return BadRequest();
         return _mapper.Map<UserDetailDto>(user);
+    }
+
+    [HttpGet("{userId}/comments")]
+    public ActionResult<PaginationList<UserCommentDto>> GetUserComments(int userId, [FromQuery] int skip = 0, [FromQuery] int limit = -1)
+    {
+        var comments = _userService.GetUserComments(userId, skip, limit);
+        var commentDtos = _mapper.Map<IEnumerable<UserCommentDto>>(comments);
+        var result = new PaginationList<UserCommentDto>
+        {
+            Items = commentDtos,
+            ItemCount = commentDtos.Count()
+        };
+        return result;
     }
 }

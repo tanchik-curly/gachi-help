@@ -1,5 +1,7 @@
-﻿using GachiHelp.BLL.DTOs;
+﻿using AutoMapper;
+using GachiHelp.BLL.DTOs;
 using GachiHelp.BLL.Services.Interfaces;
+using GachiHelp.DAL.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GachiHelp.WebApi.Controllers;
@@ -8,15 +10,18 @@ namespace GachiHelp.WebApi.Controllers;
 [Route("[controller]")]
 public class StatController : ControllerBase
 {
-    private IStatService _statService;
-    private IEmploymentService _employmentService;
+    private readonly IStatService _statService;
+    private readonly IMapper _mapper;
+    private readonly IEmploymentService _employmentService;
 
     public StatController(
-        IStatService statService,
+        IStatService statService, 
+        IMapper mapper,
         IEmploymentService employmentService
     )
     {
         _statService = statService;
+        _mapper = mapper;
         _employmentService = employmentService;
     }
 
@@ -54,5 +59,12 @@ public class StatController : ControllerBase
     public ActionResult<IEnumerable<JobApplicationDto>> GetProposedJobApplications(int userId, [FromQuery] DateTime? from, [FromQuery] DateTime? to)
     {
         return _employmentService.GetUserProposedJobApplicationsByPeriod(userId, from, to).ToArray();
+    }
+
+    [HttpGet("{userId}/social-stats")]
+    public ActionResult<SocialStatsDto> GetUserSocialStats(int userId)
+    {
+        var stats = _statService.GetUserSocialStats(userId);
+        return _mapper.Map<SocialStatsDto>(stats);
     }
 }

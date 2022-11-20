@@ -4,6 +4,7 @@ using GachiHelp.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,42 +12,17 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GachiHelp.WebApi.Migrations
 {
     [DbContext(typeof(GachiContext))]
-    partial class GachiContextModelSnapshot : ModelSnapshot
+    [Migration("20221120170000_AddedSocialStats")]
+    partial class AddedSocialStats
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.0")
+                .HasAnnotation("ProductVersion", "6.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("GachiHelp.DAL.Entities.AppliedJobApplication", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AppliedUsersId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("JobApplicationId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppliedUsersId");
-
-                    b.HasIndex("JobApplicationId");
-
-                    b.ToTable("AppliedJobApplication");
-                });
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("GachiHelp.DAL.Entities.Help", b =>
                 {
@@ -54,7 +30,7 @@ namespace GachiHelp.WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
@@ -75,23 +51,6 @@ namespace GachiHelp.WebApi.Migrations
                     b.HasIndex("HelpCategoryId");
 
                     b.ToTable("Helps");
-                });
-
-            modelBuilder.Entity("GachiHelp.DAL.Entities.HelpCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("HelpCategories");
 
                     b.HasData(
                         new
@@ -101,7 +60,6 @@ namespace GachiHelp.WebApi.Migrations
                             CreatedAt = new DateTime(2023, 12, 9, 18, 59, 59, 281, DateTimeKind.Local).AddTicks(5782),
                             HelpCategoryId = 3,
                             Status = (byte)1
-                            Name = "Соціальна допомога"
                         },
                         new
                         {
@@ -110,12 +68,10 @@ namespace GachiHelp.WebApi.Migrations
                             CreatedAt = new DateTime(2022, 10, 22, 18, 59, 59, 281, DateTimeKind.Local).AddTicks(5792),
                             HelpCategoryId = 3,
                             Status = (byte)1
-                            Name = "Допомога по працевлаштуванню"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Медична допомога"
                             AuthorId = 76,
                             CreatedAt = new DateTime(2022, 8, 27, 18, 59, 59, 281, DateTimeKind.Local).AddTicks(5795),
                             HelpCategoryId = 5,
@@ -128,7 +84,6 @@ namespace GachiHelp.WebApi.Migrations
                             CreatedAt = new DateTime(2023, 3, 21, 18, 59, 59, 281, DateTimeKind.Local).AddTicks(5803),
                             HelpCategoryId = 3,
                             Status = (byte)1
-                            Name = "Психологічна допомога"
                         },
                         new
                         {
@@ -137,7 +92,6 @@ namespace GachiHelp.WebApi.Migrations
                             CreatedAt = new DateTime(2022, 12, 17, 18, 59, 59, 281, DateTimeKind.Local).AddTicks(5806),
                             HelpCategoryId = 1,
                             Status = (byte)1
-                            Name = "Юридична допомога"
                         },
                         new
                         {
@@ -16107,49 +16061,15 @@ namespace GachiHelp.WebApi.Migrations
                             HelpCategoryId = 5,
                             Status = (byte)1
                         });
-                            Name = "Фінансова допомога"
-                        });
                 });
 
-            modelBuilder.Entity("GachiHelp.DAL.Entities.JobApplications", b =>
+            modelBuilder.Entity("GachiHelp.DAL.Entities.HelpCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ApplicationTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Salary")
-                        .HasColumnType("real");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationTypeId");
-
-                    b.ToTable("JobApplications");
-                });
-
-            modelBuilder.Entity("GachiHelp.DAL.Entities.JobApplicationsType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -16157,75 +16077,39 @@ namespace GachiHelp.WebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("JobApplicationsType");
+                    b.ToTable("HelpCategories");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            Name = "Кухар"
+                            Name = "Соціальна допомога"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Поліцейський"
+                            Name = "Допомога по працевлаштуванню"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Сушист"
+                            Name = "Медична допомога"
                         },
                         new
                         {
                             Id = 4,
-                            Name = "Далекобійник"
+                            Name = "Психологічна допомога"
                         },
                         new
                         {
                             Id = 5,
-                            Name = "Продавець-консультант"
+                            Name = "Юридична допомога"
                         },
                         new
                         {
                             Id = 6,
-                            Name = "Дизайнер"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Програміст"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Name = "Танцівщиця"
+                            Name = "Фінансова допомога"
                         });
-                });
-
-            modelBuilder.Entity("GachiHelp.DAL.Entities.ProposedJobApplication", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("JobApplicationId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsersWithProposalId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("JobApplicationId");
-
-                    b.HasIndex("UsersWithProposalId");
-
-                    b.ToTable("ProposedJobApplication");
                 });
 
             modelBuilder.Entity("GachiHelp.DAL.Entities.User", b =>
@@ -16234,7 +16118,7 @@ namespace GachiHelp.WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -17440,25 +17324,6 @@ namespace GachiHelp.WebApi.Migrations
                             Role = (byte)0,
                             Surname = "Кормош"
                         });
-                });
-
-            modelBuilder.Entity("GachiHelp.DAL.Entities.AppliedJobApplication", b =>
-                {
-                    b.HasOne("GachiHelp.DAL.Entities.User", "AppliedUser")
-                        .WithMany("AppliedJobApplication")
-                        .HasForeignKey("AppliedUsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GachiHelp.DAL.Entities.JobApplications", "JobApplication")
-                        .WithMany("AppliedJobApplication")
-                        .HasForeignKey("JobApplicationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppliedUser");
-
-                    b.Navigation("JobApplication");
                 });
 
             modelBuilder.Entity("GachiHelp.DAL.Entities.UserComment", b =>
@@ -26517,50 +26382,6 @@ namespace GachiHelp.WebApi.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("GachiHelp.DAL.Entities.JobApplications", b =>
-                {
-                    b.HasOne("GachiHelp.DAL.Entities.JobApplicationsType", "ApplicationType")
-                        .WithMany()
-                        .HasForeignKey("ApplicationTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ApplicationType");
-                });
-
-            modelBuilder.Entity("GachiHelp.DAL.Entities.ProposedJobApplication", b =>
-                {
-                    b.HasOne("GachiHelp.DAL.Entities.JobApplications", "JobApplication")
-                        .WithMany("ProposedJobApplication")
-                        .HasForeignKey("JobApplicationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GachiHelp.DAL.Entities.User", "UsersWithProposal")
-                        .WithMany("ProposedJobApplication")
-                        .HasForeignKey("UsersWithProposalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("JobApplication");
-
-                    b.Navigation("UsersWithProposal");
-                });
-
-            modelBuilder.Entity("GachiHelp.DAL.Entities.JobApplications", b =>
-                {
-                    b.Navigation("AppliedJobApplication");
-
-                    b.Navigation("ProposedJobApplication");
-                });
-
-            modelBuilder.Entity("GachiHelp.DAL.Entities.User", b =>
-                {
-                    b.Navigation("AppliedJobApplication");
-
-                    b.Navigation("ProposedJobApplication");
                 });
 #pragma warning restore 612, 618
         }
