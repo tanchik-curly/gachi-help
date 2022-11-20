@@ -8,10 +8,12 @@ namespace GachiHelp.BLL.Services;
 public class StatService : IStatService
 {
     private readonly IRepository<Help> _helpRepository;
+    private readonly IRepository<UserSocialStats> _userSocialStatsRepository;
 
-    public StatService(IRepository<Help> helpRepository)
+    public StatService(IRepository<Help> helpRepository, IRepository<UserSocialStats> userSocialStatsRepository)
     {
         _helpRepository = helpRepository;
+        _userSocialStatsRepository = userSocialStatsRepository;
     }
 
     public IEnumerable<HelpStatAggregateDto> GetHelpStatsByCategory(int? userId, int? categoryId)
@@ -39,5 +41,10 @@ public class StatService : IStatService
                     .Select(n => new HelpStatAggregateDto { Group = from2.AddMonths(n).ToString(specialVeryImportantDateFormat), Quantity = 0 }), 
                 dto => dto.Group).OrderBy(dto => dto.Group
             );
+    }
+
+    public UserSocialStats GetUserSocialStats(int userId)
+    {
+        return _userSocialStatsRepository.GetSingle(s => s.User.Id == userId);
     }
 }

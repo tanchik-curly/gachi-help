@@ -9,6 +9,7 @@ public class GachiContext : DbContext
     public DbSet<HelpCategory> HelpCategories { get; set; } = null!;
     public DbSet<Help> Helps { get; set; } = null!;
     public DbSet<UserComment> UserComments { get; set; } = null!;
+    public DbSet<UserSocialStats> UserSocialStats { get; set; } = null!;
 
     public GachiContext(DbContextOptions<GachiContext> options) : base(options) { }
 
