@@ -11,5 +11,6 @@ public class GachiProfile : Profile
         CreateMap<User, UserDto>();
         CreateMap<User, UserDetailDto>();
         CreateMap<Help, HelpDto>();
+        CreateMap<UserComment, UserCommentDto>();
     }
 }
