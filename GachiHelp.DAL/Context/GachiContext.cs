@@ -8,6 +8,7 @@ public class GachiContext : DbContext
     public DbSet<User> Users { get; set; } = null!;
     public DbSet<HelpCategory> HelpCategories { get; set; } = null!;
     public DbSet<Help> Helps { get; set; } = null!;
+    public DbSet<UserComment> UserComments { get; set; } = null!;
 
     public GachiContext(DbContextOptions<GachiContext> options) : base(options) { }
 
@@ -20,5 +21,4 @@ public class GachiContext : DbContext
         
         base.OnModelCreating(modelBuilder);
     }
-
 }
