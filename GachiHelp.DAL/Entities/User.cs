@@ -19,4 +19,8 @@ public class User : IEntity
     public string Surname { get; set; } = null!;
 
     public string Patronym { get; set; } = null!;
+
+    public ICollection<AppliedJobApplication> AppliedJobApplication { get; set; }
+
+    public ICollection<ProposedJobApplication> ProposedJobApplication { get; set; }
 }

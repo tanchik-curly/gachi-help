@@ -9,10 +9,15 @@ namespace GachiHelp.WebApi.Controllers;
 public class StatController : ControllerBase
 {
     private IStatService _statService;
+    private IEmploymentService _employmentService;
 
-    public StatController(IStatService statService)
+    public StatController(
+        IStatService statService,
+        IEmploymentService employmentService
+    )
     {
         _statService = statService;
+        _employmentService = employmentService;
     }
 
     [HttpGet("help-requests")]
@@ -29,11 +34,25 @@ public class StatController : ControllerBase
     [HttpGet("{userId}/help-requests")]
     public ActionResult<IEnumerable<HelpStatAggregateDto>> GetUsersHelpStats(int userId, [FromQuery] string by, [FromQuery] DateTime? from, [FromQuery] DateTime? to, [FromQuery] int? categoryId)
     {
+        Console.WriteLine("userId help", userId);
+
         return by switch
         {
             "period" => _statService.GetHelpStatsByPeriod(userId, from, to).ToArray(),
             "category" => _statService.GetHelpStatsByCategory(userId, categoryId).ToArray(),
             _ => BadRequest()
         };
+    }
+
+    [HttpGet("{userId}/job-applications")]
+    public ActionResult<IEnumerable<JobApplicationDto>> GetAppliedJobApplications(int userId, [FromQuery] DateTime? from, [FromQuery] DateTime? to)
+    {
+        return _employmentService.GetUserAppliedJobApplicationByPeriod(userId, from, to).ToArray();
+    }
+
+    [HttpGet("{userId}/proposed-job-applications")]
+    public ActionResult<IEnumerable<JobApplicationDto>> GetProposedJobApplications(int userId, [FromQuery] DateTime? from, [FromQuery] DateTime? to)
+    {
+        return _employmentService.GetUserProposedJobApplicationsByPeriod(userId, from, to).ToArray();
     }
 }

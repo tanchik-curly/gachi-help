@@ -1209,7 +1209,16 @@ namespace GachiHelp.DAL.Context
                 };
             });
 
-            modelBuilder.Entity<Help>().HasData(help);
+            modelBuilder.Entity<JobApplicationsType>().HasData(
+                new JobApplicationsType { Id = 1, Name = "Кухар" },
+                new JobApplicationsType { Id = 2, Name = "Поліцейський" },
+                new JobApplicationsType { Id = 3, Name = "Сушист" },
+                new JobApplicationsType { Id = 4, Name = "Далекобійник" },
+                new JobApplicationsType { Id = 5, Name = "Продавець-консультант" },
+                new JobApplicationsType { Id = 6, Name = "Дизайнер" },
+                new JobApplicationsType { Id = 7, Name = "Програміст" },
+                new JobApplicationsType { Id = 8, Name = "Танцівщиця" }
+            );
         }
         private static string HashPassword(string password) => Convert.ToBase64String(SHA256.HashData(Encoding.Default.GetBytes(password)));
     }

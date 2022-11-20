@@ -8,6 +8,9 @@ public class GachiContext : DbContext
     public DbSet<User> Users { get; set; } = null!;
     public DbSet<HelpCategory> HelpCategories { get; set; } = null!;
     public DbSet<Help> Helps { get; set; } = null!;
+    public DbSet<JobApplications> JobApplications { get; set; } = null!;
+
+    public DbSet<AppliedJobApplication> AppliedJobApplication { get; set; } = null!;
 
     public GachiContext(DbContextOptions<GachiContext> options) : base(options) { }
 
@@ -15,6 +18,16 @@ public class GachiContext : DbContext
     {
         modelBuilder.Entity<User>().HasIndex(u => u.Login).IsUnique();
         modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
+
+        modelBuilder.Entity<AppliedJobApplication>()
+            .HasOne(app => app.JobApplication)
+            .WithMany(u => u.AppliedJobApplication)
+            .HasForeignKey(app => app.JobApplicationId);
+
+        modelBuilder.Entity<AppliedJobApplication>()
+            .HasOne(app => app.AppliedUser)
+            .WithMany(u => u.AppliedJobApplication)
+            .HasForeignKey(app => app.AppliedUsersId);
 
         modelBuilder.Seed();
         

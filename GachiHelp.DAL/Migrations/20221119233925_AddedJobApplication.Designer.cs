@@ -4,6 +4,7 @@ using GachiHelp.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GachiHelp.WebApi.Migrations
 {
     [DbContext(typeof(GachiContext))]
-    partial class GachiContextModelSnapshot : ModelSnapshot
+    [Migration("20221119233925_AddedJobApplication")]
+    partial class AddedJobApplication
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -215,32 +218,6 @@ namespace GachiHelp.WebApi.Migrations
                             Id = 8,
                             Name = "Танцівщиця"
                         });
-                });
-
-            modelBuilder.Entity("GachiHelp.DAL.Entities.ProposedJobApplication", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("JobApplicationId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsersWithProposalId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("JobApplicationId");
-
-                    b.HasIndex("UsersWithProposalId");
-
-                    b.ToTable("ProposedJobApplication");
                 });
 
             modelBuilder.Entity("GachiHelp.DAL.Entities.User", b =>
@@ -1506,37 +1483,14 @@ namespace GachiHelp.WebApi.Migrations
                     b.Navigation("ApplicationType");
                 });
 
-            modelBuilder.Entity("GachiHelp.DAL.Entities.ProposedJobApplication", b =>
-                {
-                    b.HasOne("GachiHelp.DAL.Entities.JobApplications", "JobApplication")
-                        .WithMany("ProposedJobApplication")
-                        .HasForeignKey("JobApplicationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GachiHelp.DAL.Entities.User", "UsersWithProposal")
-                        .WithMany("ProposedJobApplication")
-                        .HasForeignKey("UsersWithProposalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("JobApplication");
-
-                    b.Navigation("UsersWithProposal");
-                });
-
             modelBuilder.Entity("GachiHelp.DAL.Entities.JobApplications", b =>
                 {
                     b.Navigation("AppliedJobApplication");
-
-                    b.Navigation("ProposedJobApplication");
                 });
 
             modelBuilder.Entity("GachiHelp.DAL.Entities.User", b =>
                 {
                     b.Navigation("AppliedJobApplication");
-
-                    b.Navigation("ProposedJobApplication");
                 });
 #pragma warning restore 612, 618
         }
