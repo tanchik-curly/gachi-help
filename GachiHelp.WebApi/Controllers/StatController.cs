@@ -1,5 +1,7 @@
-﻿using GachiHelp.BLL.DTOs;
+﻿using AutoMapper;
+using GachiHelp.BLL.DTOs;
 using GachiHelp.BLL.Services.Interfaces;
+using GachiHelp.DAL.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GachiHelp.WebApi.Controllers;
@@ -8,11 +10,13 @@ namespace GachiHelp.WebApi.Controllers;
 [Route("[controller]")]
 public class StatController : ControllerBase
 {
-    private IStatService _statService;
+    private readonly IStatService _statService;
+    private readonly IMapper _mapper;
 
-    public StatController(IStatService statService)
+    public StatController(IStatService statService, IMapper mapper)
     {
         _statService = statService;
+        _mapper = mapper;
     }
 
     [HttpGet("help-requests")]
@@ -35,5 +39,12 @@ public class StatController : ControllerBase
             "category" => _statService.GetHelpStatsByCategory(userId, categoryId).ToArray(),
             _ => BadRequest()
         };
+    }
+
+    [HttpGet("{userId}/social-stats")]
+    public ActionResult<SocialStatsDto> GetUserSocialStats(int userId)
+    {
+        var stats = _statService.GetUserSocialStats(userId);
+        return _mapper.Map<SocialStatsDto>(stats);
     }
 }
