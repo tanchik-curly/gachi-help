@@ -10,16 +10,19 @@ public class EmploymentService : IEmploymentService
 {
     private readonly IRepository<AppliedJobApplication> _employmentRepository;
     private readonly IRepository<ProposedJobApplication> _proposedApplicationRepository;
+    private readonly IRepository<JobCertification> _certificationRepository;
     private readonly IMapper _mapper;
 
     public EmploymentService(
         IRepository<AppliedJobApplication> employmentRepository,
         IRepository<ProposedJobApplication> proposedApplicationRepository,
+        IRepository<JobCertification> certificationRepository,
         IMapper mapper
      )
     {
         _employmentRepository = employmentRepository;
         _proposedApplicationRepository = proposedApplicationRepository;
+        _certificationRepository = certificationRepository;
         _mapper = mapper;
     }
 
@@ -54,5 +57,26 @@ public class EmploymentService : IEmploymentService
                 proposedApplication => proposedApplication.JobApplication,
                 proposedApplication => proposedApplication.JobApplication.ApplicationType)
             .Select(g => _mapper.Map<JobApplicationDto>(g.JobApplication));
+    }
+
+    public IEnumerable<JobCertificationDto> GetUserCertificationsByPeriod(int userId, DateTime? dateFrom, DateTime? dateTo, int skip = 0, int limit = -1)
+    {
+        DateTime from = dateFrom ?? _certificationRepository.FindBy(certification => certification.CertificatedUserId == userId).Min(certification => certification.CreatedAt);
+        DateTime to = dateTo ?? _certificationRepository.FindBy(certification => certification.CertificatedUserId == userId).Max(certification => certification.CreatedAt);
+
+        Console.WriteLine("from: " + from);
+        Console.WriteLine("to: " + to);
+
+        var certificates = _certificationRepository
+            .FindIncluding(
+            certification => certification.CertificatedUserId == userId &&
+                certification.CreatedAt >= from && certification.CreatedAt <= to)
+            .Skip(skip)
+            .Select(g => _mapper.Map<JobCertificationDto>(g));
+        if(limit >= 0)
+        {
+            certificates = certificates.Take(limit).ToList();
+        }
+        return certificates;
     }
 }

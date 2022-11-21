@@ -1263,6 +1263,8 @@ namespace GachiHelp.DAL.Context
                     CreatedAt = DateTime.Now.AddDays(r.Next(-100, 500)) 
                 };
             });
+            modelBuilder.Entity<Help>().HasData(help);
+            #endregion
 
             modelBuilder.Entity<JobApplicationsType>().HasData(
                 new JobApplicationsType { Id = 1, Name = "Кухар" },
@@ -1274,7 +1276,148 @@ namespace GachiHelp.DAL.Context
                 new JobApplicationsType { Id = 7, Name = "Програміст" },
                 new JobApplicationsType { Id = 8, Name = "Танцівщиця" }
             );
-            modelBuilder.Entity<Help>().HasData(help);
+
+            #region JobApplications
+            var jobTitles = new string[15]
+            {
+                "Сушист, суші-кухар",
+                "Водій далекобійник (10 т) по Україні",
+                "Продавець-консультант",
+                "Водiї на мiкроавтобуси по Европi",
+                "Дизайнер-консультант по шторам",
+                "Далекобійник",
+                "Дизайнер корпусних меблів",
+                "Продавець-консультант",
+                "Помічник кухаря",
+                "Кухар",
+                "Водій-міжнародник кат. СE (тент)",
+                "Танцівниця",
+                "DevOps інженер",
+                "Java Tech Lead",
+                "Scala Tech Lead"
+            };
+
+            var applications = new object[1000];
+
+            for (int i = 0; i < applications.Length; ++i)
+            {
+                applications[i] = new
+                JobApplications {
+                    Id = i + 1,
+                    CreatedAt = DateTime.Now.AddDays(-1 * random.Next(100)),
+                    ApplicationTypeId = random.Next(1, 8),
+                    Name = jobTitles[random.Next(0, jobTitles.Length)],
+                    Description = new string(Enumerable.Repeat(chars, 50).Select(s => s[random.Next(s.Length)]).ToArray()),
+                    Salary = random.Next(5500, 80000)
+                };
+            }
+
+            modelBuilder.Entity<JobApplications>().HasData(applications);
+            #endregion
+
+            #region UserApppliedApplications
+            var appliedApplications = new AppliedJobApplication[users.Length * 4];
+
+
+            for (int i = 0; i < appliedApplications.Length; ++i)
+            {
+                appliedApplications[i] = new AppliedJobApplication
+                {
+                    Id = i + 1,
+                    AppliedUsersId = random.Next(1, 100),
+                    JobApplicationId = random.Next(1, 1000),
+                    CreatedAt = DateTime.Now.AddDays(-1 * random.Next(100)),
+                };
+            }
+
+            modelBuilder.Entity<AppliedJobApplication>().HasData(appliedApplications);
+
+            // seed 10 users data
+            var appliedApplications2 = new AppliedJobApplication[250];
+            for (int i = 0; i < appliedApplications2.Length; ++i)
+            {
+                appliedApplications2[i] = new AppliedJobApplication
+                {
+                    Id = i + 1 + 424,
+                    AppliedUsersId = random.Next(1, 10),
+                    JobApplicationId = random.Next(1, 1000),
+                    CreatedAt = DateTime.Now.AddDays(-1 * random.Next(100)),
+                };
+            }
+
+            modelBuilder.Entity<AppliedJobApplication>().HasData(appliedApplications2);
+            #endregion
+
+            #region UserProposedApplications
+            var proposedApplications = new ProposedJobApplication[users.Length * 4];
+
+            for (int i = 0; i < proposedApplications.Length; ++i)
+            {
+                proposedApplications[i] = new ProposedJobApplication
+                {
+                    Id = i + 1,
+                    UsersWithProposalId = random.Next(1, 100),
+                    JobApplicationId = random.Next(1, 1000),
+                    CreatedAt = DateTime.Now.AddDays(-1 * random.Next(100)),
+                };
+            }
+
+            modelBuilder.Entity<ProposedJobApplication>().HasData(proposedApplications);
+
+            // seed 10 users data
+            var proposedApplications2 = new ProposedJobApplication[250];
+            for (int i = 0; i < proposedApplications2.Length; ++i)
+            {
+                proposedApplications2[i] = new ProposedJobApplication
+                {
+                    Id = i + 1 + 424,
+                    UsersWithProposalId = random.Next(1, 10),
+                    JobApplicationId = random.Next(1, 1000),
+                    CreatedAt = DateTime.Now.AddDays(-1 * random.Next(100)),
+                };
+            }
+
+            modelBuilder.Entity<ProposedJobApplication>().HasData(proposedApplications2);
+            #endregion
+
+            #region JobCertifications
+            var certificationTitles = new string[17]
+            {
+                "Повар української кухні",
+                "Node.js розробник",
+                "Java розробник",
+                "Танцівщиця східних танців",
+                "Базовий курс європейської кухні",
+                "Водій міжнародної категорії",
+                "Дизайнер корпусних меблів",
+                "Дизайнер інтер'єрів",
+                "Дизайнер ландшафтів",
+                "Сушист",
+                "Сушист вищого розряду",
+                "Базовий курс балету",
+                "DevOps інженер",
+                "Слідча справа",
+                "Перша медична допомога",
+                "Повар тайської кухні",
+                "Кондитер"
+            };
+
+            var certifications = new object[1000];
+
+            for (int i = 0; i < certifications.Length; ++i)
+            {
+                certifications[i] = new
+                JobCertification
+                {
+                    Id = i + 1,
+                    CreatedAt = DateTime.Now.AddDays(-1 * random.Next(100)),
+                    CertificatedUserId = random.Next(1, 100),
+                    Name = certificationTitles[random.Next(0, certificationTitles.Length)],
+                    Description = new string(Enumerable.Repeat(chars, 50).Select(s => s[random.Next(s.Length)]).ToArray())
+                };
+            }
+
+            modelBuilder.Entity<JobCertification>().HasData(certifications);
             #endregion
         }
         private static string HashPassword(string password) => Convert.ToBase64String(SHA256.HashData(Encoding.Default.GetBytes(password)));

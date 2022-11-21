@@ -16,7 +16,5 @@ public class JobApplicationDto
 
     public float Salary { get; set; }
 
-    //public ICollection<User>? UsersWithProposal { get; set; }
-
     public DateTime CreatedAt { get; set; }
 }

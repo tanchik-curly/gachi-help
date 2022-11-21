@@ -61,6 +61,12 @@ public class StatController : ControllerBase
         return _employmentService.GetUserProposedJobApplicationsByPeriod(userId, from, to).ToArray();
     }
 
+    [HttpGet("{userId}/certifications")]
+    public ActionResult<IEnumerable<JobCertificationDto>> GetUserCertifications(int userId, [FromQuery] DateTime? from, [FromQuery] DateTime? to, [FromQuery] int skip = 0, [FromQuery] int limit = -1)
+    {
+        return _employmentService.GetUserCertificationsByPeriod(userId, from, to, skip, limit).ToArray();
+    }
+
     [HttpGet("{userId}/social-stats")]
     public ActionResult<SocialStatsDto> GetUserSocialStats(int userId)
     {

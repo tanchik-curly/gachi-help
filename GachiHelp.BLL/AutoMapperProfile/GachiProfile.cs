@@ -14,5 +14,6 @@ public class GachiProfile : Profile
         CreateMap<UserComment, UserCommentDto>();
         CreateMap<UserSocialStats, SocialStatsDto>();
         CreateMap<JobApplications, JobApplicationDto>();
+        CreateMap <JobCertification, JobCertificationDto>();
     }
 }
