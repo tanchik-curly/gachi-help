@@ -26,7 +26,7 @@ public class HelpService : IHelpService
 
         int count = help.Count();
 
-        help = help.OrderBy(h => h.CreatedAt).Skip(skip);
+        help = help.OrderByDescending(h => h.CreatedAt).Skip(skip);
 
         if (limit != -1) 
             help = help.Take(limit);

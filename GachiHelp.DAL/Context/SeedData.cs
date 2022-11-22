@@ -1260,7 +1260,7 @@ namespace GachiHelp.DAL.Context
                     AuthorId = r.Next(2, 107), 
                     Status = (DocumentStatus)status, 
                     HelpCategoryId = r.Next(1, 7), 
-                    CreatedAt = DateTime.Now.AddDays(r.Next(-100, 500)) 
+                    CreatedAt = DateTime.Now.AddDays(-r.Next(600)) 
                 };
             });
             modelBuilder.Entity<Help>().HasData(help);
