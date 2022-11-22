@@ -1,8 +1,9 @@
 ﻿using GachiHelp.BLL.DTOs;
+using GachiHelp.DAL.Entities;
 
 namespace GachiHelp.BLL.Services.Interfaces;
 
 public interface IHelpService
 {
-    PaginationList<HelpDto> GetHelp(int userId = -1, int skip = 0, int limit = -1);
+    IEnumerable<Help> GetHelp(int userId = -1, DateTime from = default, DateTime to = default);
 }

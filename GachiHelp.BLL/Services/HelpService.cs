@@ -9,31 +9,23 @@ namespace GachiHelp.BLL.Services;
 public class HelpService : IHelpService
 {
     private readonly IRepository<Help> _helpRepository;
-    private readonly IMapper _mapper;
 
-    public HelpService(IRepository<Help> helpRepository, IMapper mapper)
+    public HelpService(IRepository<Help> helpRepository)
     {
         _helpRepository = helpRepository;
-        _mapper = mapper;
     }
 
-    public PaginationList<HelpDto> GetHelp(int userId = -1, int skip = 0, int limit = -1)
+    public IEnumerable<Help> GetHelp(int userId = -1, DateTime from = default, DateTime to = default)
     {
-        var help = _helpRepository.AllIncluding(h => h.Author!, h => h.HelpCategory!);
+        var help = _helpRepository.FindIncluding(
+            h => (from == default || h.CreatedAt > from) 
+                && (to == default || h.CreatedAt <= to), 
+            h => h.Author!, h => 
+            h.HelpCategory!);
 
         if (userId != -1)
             help = help.Where(h => h.AuthorId == userId);
 
-        int count = help.Count();
-
-        help = help.OrderByDescending(h => h.CreatedAt).Skip(skip);
-
-        if (limit != -1) 
-            help = help.Take(limit);
-
-        return new PaginationList<HelpDto> {
-            Items = help.Select(h => _mapper.Map<HelpDto>(h)),
-            ItemCount = count
-        };
+        return help.OrderByDescending(h => h.CreatedAt);
     }
 }
