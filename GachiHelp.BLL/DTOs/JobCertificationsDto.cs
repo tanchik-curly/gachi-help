@@ -6,8 +6,6 @@ public class JobCertificationDto
 {
     public int Id { get; set; }
 
-    public User CertificatedUser { get; set; }
-
     public int CertificatedUserId { get; set; }
 
     public string Name { get; set; }
