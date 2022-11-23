@@ -51,11 +51,10 @@ public class StatController : ControllerBase
     }
 
     [HttpGet("{userId}/job-applications")]
-    public ActionResult<IEnumerable<JobApplicationDto>> GetAppliedJobApplications(int userId, [FromQuery] DateTime? from, [FromQuery] DateTime? to)
+    public ActionResult<PaginationList<JobApplicationDto>> GetAppliedJobApplications(int userId, [FromQuery] DateTime? from, [FromQuery] DateTime? to, [FromQuery] int skip = 0, [FromQuery] int limit = -1)
     {
         IEnumerable<JobApplications> applications = _employmentService.GetUserAppliedJobApplicationByPeriod(userId, from, to).ToArray();
-        return applications.Select(app => _mapper.Map<JobApplicationDto>(app)).ToList();
-
+        return GenerateApplicationnPaginationList(applications, skip, limit);
     }
 
     [HttpGet("{userId}/proposed-job-applications")]
@@ -91,5 +90,19 @@ public class StatController : ControllerBase
         }
 
         return new PaginationList<JobCertificationDto> { Items = certifications.Select(h => _mapper.Map<JobCertificationDto>(h)), ItemCount = count };
+    }
+
+    private PaginationList<JobApplicationDto> GenerateApplicationnPaginationList(IEnumerable<JobApplications> applications, int skip, int limit)
+    {
+        int count = applications.Count();
+
+        applications = applications.Skip(skip);
+
+        if (limit != -1)
+        {
+            applications = applications.Take(limit);
+        }
+
+        return new PaginationList<JobApplicationDto> { Items = applications.Select(h => _mapper.Map<JobApplicationDto>(h)), ItemCount = count };
     }
 }
